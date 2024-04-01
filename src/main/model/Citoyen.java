@@ -1,6 +1,5 @@
 package main.model;
 
-import java.util.*;
 import java.time.LocalDate;
 
 public class Citoyen {
@@ -13,7 +12,7 @@ public class Citoyen {
     public Deces deces;
     public Naissance naissance;
 
-    public Citoyen(String name, String p, LocalDate d, Mairie m, Naissance n){
+    public Citoyen(String name, String p, LocalDate d, Mairie m, Naissance n) {
         id = get_id++;
         nom = name;
         prenom = p;
@@ -23,5 +22,14 @@ public class Citoyen {
         naissance = n;
     }
 
+    public void to_string() {
+        if (this instanceof Homme) {
+            System.out.println(nom + " " + prenom + " " + "Homme" + " " +
+                    date_naissance + " " + mairie.nom_ville);
+        } else {
+            System.out.println(nom + " " + prenom + " " + "Femme" + " "
+                    + date_naissance + " " + mairie.nom_ville);
+        }
+    }
 
 }
