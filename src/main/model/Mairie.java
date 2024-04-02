@@ -84,63 +84,39 @@ public class Mairie {
     }
 
     public void enregistrer_naissance(int p1, int p2, LocalDate date_naissance, String nom, String prenom, String sexe)
-            throws PersonneInexistante, Mort {
-        Citoyen parent1 = trouver_citoyen_par_id(p1);
-        Citoyen parent2 = trouver_citoyen_par_id(p2);
+            throws PersonneInexistante, Mort, java.lang.IllegalArgumentException {
+        Homme parent1 = (Homme) trouver_citoyen_par_id(p1);
+        Femme parent2 = (Femme) trouver_citoyen_par_id(p2);
+        if(!(parent1 instanceof Homme)){
+            throw new java.lang.IllegalArgumentException();
+        }
+        if(!(parent2 instanceof Femme)){
+            throw new java.lang.IllegalArgumentException();
+        }
         if (parent1.deces != null) {
             throw new Mort(p1);
         }
         if (parent2.deces != null) {
             throw new Mort(p2);
         }
-        Naissance n = new Naissance(date_naissance, this, Citoyen.get_id, parent1, parent2);
-        naissance.add(n);
         Citoyen c;
         if (sexe.equals("Homme")) {
-            c = new Homme(nom, prenom, date_naissance, this, n);
+            c = new Homme(nom, prenom, date_naissance, this);
         } else {
-            c = new Femme(nom, prenom, date_naissance, this, n);
+            c = new Femme(nom, prenom, date_naissance, this);
         }
+        Naissance n = new Naissance(date_naissance, this, c, parent1, parent2);
+        c.naissance = n;
         citoyen.add(c);
-    }
-
-    public void ajouter_citoyen(Integer p1, Integer p2,
-            LocalDate date_naissance, String nom, String prenom, String sexe) throws PersonneInexistante {
-        Citoyen parent1 = trouver_citoyen_par_id(p1);
-        Citoyen parent2 = trouver_citoyen_par_id(p2);
-        Naissance n = new Naissance(date_naissance, this, Citoyen.get_id, parent1, parent2);
         naissance.add(n);
-        Citoyen c;
-        if (sexe.equals("Homme")) {
-            c = new Homme(nom, prenom, date_naissance, this, n);
-        } else {
-            c = new Femme(nom, prenom, date_naissance, this, n);
-        }
-        citoyen.add(c);
-    }
-
-    public void ajouter_citoyen(Integer p1,
-            LocalDate date_naissance, String nom, String prenom, String sexe) throws PersonneInexistante {
-        Citoyen parent1 = trouver_citoyen_par_id(p1);
-        Naissance n = new Naissance(date_naissance, this, Citoyen.get_id, parent1);
-        naissance.add(n);
-        Citoyen c;
-        if (sexe.equals("Homme")) {
-            c = new Homme(nom, prenom, date_naissance, this, n);
-        } else {
-            c = new Femme(nom, prenom, date_naissance, this, n);
-        }
-        citoyen.add(c);
     }
 
     public void ajouter_citoyen(LocalDate date_naissance, String nom, String prenom, String sexe) {
-        Naissance n = new Naissance(date_naissance, this, Citoyen.get_id);
-        naissance.add(n);
         Citoyen c;
         if (sexe.equals("Homme")) {
-            c = new Homme(nom, prenom, date_naissance, this, n);
+            c = new Homme(nom, prenom, date_naissance, this);
         } else {
-            c = new Femme(nom, prenom, date_naissance, this, n);
+            c = new Femme(nom, prenom, date_naissance, this);
         }
         citoyen.add(c);
     }

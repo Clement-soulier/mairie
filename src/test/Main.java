@@ -113,6 +113,17 @@ public class Main {
             System.out.println("Erreur " + e);
         }
 
+        // si les deux parents ne sont pas de sexe opposés
+        try {
+            m.enregistrer_naissance(0, 2, date, "Bricoleur", "Martine", "Femme");
+        } catch (PersonneInexistante e) {
+            System.out.println("Erreur " + e);
+        } catch (Mort e) {
+            System.out.println("Erreur " + e);
+        } catch (java.lang.IllegalArgumentException e){
+            System.out.println("Les deux parents ne sont pas de sexe opposés");
+        }
+
         // divorce
         try {
             m.enregistrer_divorce(0);

@@ -22,6 +22,17 @@ public class Citoyen {
         naissance = n;
     }
 
+    public Citoyen(String name, String p, LocalDate d, Mairie m) {
+        id = get_id++;
+        nom = name;
+        prenom = p;
+        date_naissance = d;
+        mairie = m;
+        deces = null;
+        naissance = null;
+    }
+
+
     public void to_string() {
         if (this instanceof Homme) {
             System.out.println(nom + " " + prenom + " " + "Homme" + " " +
