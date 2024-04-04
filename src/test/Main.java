@@ -5,7 +5,7 @@ import main.model.*;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] Args) {
+    public static void main(String[] args) {
         Mairie m = new Mairie("Feurs");
         LocalDate date = LocalDate.now();
 
@@ -106,7 +106,7 @@ public class Main {
 
         // si une personne est morte
         try {
-            m.enregistrer_naissance(5, 4, date, "Bricoleur", "Martine", "Femme");
+            m.enregistrer_naissance(4, 5, date, "Bricoleur", "Martine", "Femme");
         } catch (PersonneInexistante e) {
             System.out.println("Erreur " + e);
         } catch (Mort e) {
@@ -120,7 +120,7 @@ public class Main {
             System.out.println("Erreur " + e);
         } catch (Mort e) {
             System.out.println("Erreur " + e);
-        } catch (java.lang.IllegalArgumentException e){
+        } catch (java.lang.IllegalArgumentException e) {
             System.out.println("Les deux parents ne sont pas de sexe opposés");
         }
 

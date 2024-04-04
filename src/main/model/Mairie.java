@@ -30,6 +30,32 @@ public class Mairie {
         throw new PersonneInexistante(id_citoyen);
     }
 
+    public Homme trouver_homme_par_id(int id_citoyen) throws PersonneInexistante, java.lang.IllegalArgumentException {
+        for (Citoyen citoyen : citoyen) {
+            if (citoyen.id == id_citoyen) {
+                if (citoyen instanceof Homme) {
+                    return (Homme) citoyen;
+                } else {
+                    throw new java.lang.IllegalArgumentException();
+                }
+            }
+        }
+        throw new PersonneInexistante(id_citoyen);
+    }
+
+    public Femme trouver_femme_par_id(int id_citoyen) throws PersonneInexistante, java.lang.IllegalArgumentException {
+        for (Citoyen citoyen : citoyen) {
+            if (citoyen.id == id_citoyen) {
+                if (citoyen instanceof Femme) {
+                    return (Femme) citoyen;
+                } else {
+                    throw new java.lang.IllegalArgumentException();
+                }
+            }
+        }
+        throw new PersonneInexistante(id_citoyen);
+    }
+
     public boolean est_marie(int id_personne) {
         for (Mariage mariage : mariage) {
             if ((mariage.partenaire1.id == id_personne ||
@@ -83,21 +109,16 @@ public class Mairie {
         mariage.divorce = d;
     }
 
-    public void enregistrer_naissance(int p1, int p2, LocalDate date_naissance, String nom, String prenom, String sexe)
+    public void enregistrer_naissance(int id_pere, int id_mere, LocalDate date_naissance, String nom, String prenom,
+            String sexe)
             throws PersonneInexistante, Mort, java.lang.IllegalArgumentException {
-        Homme parent1 = (Homme) trouver_citoyen_par_id(p1);
-        Femme parent2 = (Femme) trouver_citoyen_par_id(p2);
-        if(!(parent1 instanceof Homme)){
-            throw new java.lang.IllegalArgumentException();
-        }
-        if(!(parent2 instanceof Femme)){
-            throw new java.lang.IllegalArgumentException();
-        }
+        Homme parent1 = trouver_homme_par_id(id_pere);
+        Femme parent2 = trouver_femme_par_id(id_mere);
         if (parent1.deces != null) {
-            throw new Mort(p1);
+            throw new Mort(id_pere);
         }
         if (parent2.deces != null) {
-            throw new Mort(p2);
+            throw new Mort(id_mere);
         }
         Citoyen c;
         if (sexe.equals("Homme")) {
