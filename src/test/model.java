@@ -4,7 +4,7 @@ import main.exceptions.*;
 import main.model.*;
 import java.time.LocalDate;
 
-public class Main {
+public class model {
     public static void main(String[] args) {
         Mairie m = new Mairie("Feurs");
         LocalDate date = LocalDate.now();
