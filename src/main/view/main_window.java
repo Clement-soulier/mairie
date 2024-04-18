@@ -49,7 +49,7 @@ public class Main_window extends JFrame {
 
         add(fichierMenu);
         add(actionMenu);
-        JMenu APropos = new JMenu("A propos");
+        JMenuItem APropos = new JMenuItem("A propos");
         menu.add(fichierMenu);
         menu.add(actionMenu);
         menu.add(APropos);
@@ -61,6 +61,13 @@ public class Main_window extends JFrame {
         currentPanel = new main.view.Mariage();
         contentPane.add(currentPanel, BorderLayout.CENTER);
         add(contentPane);
+
+        etat.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new main.view.Etat();
+            }
+        });
 
         liste.addActionListener(new ActionListener() {
             @Override
@@ -125,6 +132,13 @@ public class Main_window extends JFrame {
                 contentPane.add(currentPanel, BorderLayout.CENTER);
                 revalidate();
                 repaint();
+            }
+        });
+
+        APropos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new main.view.APropos();
             }
         });
 
