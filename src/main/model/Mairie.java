@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import main.exceptions.*;
 
 public class Mairie {
-    protected String nom_ville;
+    public String nom_ville;
     public ArrayList<Citoyen> citoyen;
     public ArrayList<Mariage> mariage;
     public ArrayList<Naissance> naissance;

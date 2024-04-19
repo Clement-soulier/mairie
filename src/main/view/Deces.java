@@ -2,9 +2,10 @@ package main.view;
 
 import java.awt.*;
 import javax.swing.*;
+import main.model.*;
 
 public class Deces extends JPanel {
-    public Deces() {
+    public Deces(Mairie mairie) {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 

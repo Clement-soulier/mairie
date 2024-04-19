@@ -3,13 +3,14 @@ package main.view;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import main.model.*;
 
 public class Main_window extends JFrame {
 
     private JPanel contentPane;
     private JPanel currentPanel;
 
-    public Main_window() {
+    public Main_window(Mairie mairie) {
         super("gestion mairie");
         setSize(900, 600);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -58,14 +59,14 @@ public class Main_window extends JFrame {
         // initialisation fenêtre
         contentPane = new JPanel();
         contentPane.setLayout(new BorderLayout());
-        currentPanel = new main.view.Mariage();
+        currentPanel = new main.view.Mariage(mairie);
         contentPane.add(currentPanel, BorderLayout.CENTER);
         add(contentPane);
 
         etat.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new main.view.Etat();
+                new main.view.Etat(mairie);
             }
         });
 
@@ -73,7 +74,7 @@ public class Main_window extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 contentPane.remove(currentPanel);
-                currentPanel = new main.view.Liste();
+                currentPanel = new main.view.Liste(mairie);
                 contentPane.add(currentPanel, BorderLayout.CENTER);
                 revalidate();
                 repaint();
@@ -84,7 +85,7 @@ public class Main_window extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 contentPane.remove(currentPanel);
-                currentPanel = new main.view.Mariage();
+                currentPanel = new main.view.Mariage(mairie);
                 contentPane.add(currentPanel, BorderLayout.CENTER);
                 revalidate();
                 repaint();
@@ -95,7 +96,7 @@ public class Main_window extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 contentPane.remove(currentPanel);
-                currentPanel = new main.view.Divorce();
+                currentPanel = new main.view.Divorce(mairie);
                 contentPane.add(currentPanel, BorderLayout.CENTER);
                 revalidate();
                 repaint();
@@ -106,7 +107,7 @@ public class Main_window extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 contentPane.remove(currentPanel);
-                currentPanel = new main.view.Deces();
+                currentPanel = new main.view.Deces(mairie);
                 contentPane.add(currentPanel, BorderLayout.CENTER);
                 revalidate();
                 repaint();
@@ -117,7 +118,7 @@ public class Main_window extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 contentPane.remove(currentPanel);
-                currentPanel = new main.view.Ajouter();
+                currentPanel = new main.view.Ajouter(mairie);
                 contentPane.add(currentPanel, BorderLayout.CENTER);
                 revalidate();
                 repaint();
@@ -128,7 +129,7 @@ public class Main_window extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 contentPane.remove(currentPanel);
-                currentPanel = new main.view.Naissance();
+                currentPanel = new main.view.Naissance(mairie);
                 contentPane.add(currentPanel, BorderLayout.CENTER);
                 revalidate();
                 repaint();

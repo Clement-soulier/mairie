@@ -3,10 +3,11 @@ package main.view;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import main.model.*;
 
 public class Etat extends JFrame {
 
-    public Etat() {
+    public Etat(Mairie mairie) {
         super("Etat");
         setSize(400, 200);
 
