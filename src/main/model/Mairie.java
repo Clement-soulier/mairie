@@ -150,36 +150,32 @@ public class Mairie {
         c.deces = d;
     }
 
-    public Etat_personne obtenir_etat(int id) throws PersonneInexistante {
+    public Etat_personne obtenir_etat(Citoyen citoyen) {
         try {
-            Citoyen citoyen = this.trouver_citoyen_par_id(id);
             String sexe;
             if (citoyen instanceof Homme) {
                 sexe = "Homme";
             } else {
                 sexe = "Femme";
             }
-            Mariage mariage = this.obtenir_mariage(id);
+            Mariage mariage = this.obtenir_mariage(citoyen.id);
             if (mariage.partenaire1 == citoyen) {
                 String nom_prenom_conjoint = mariage.partenaire2.nom + " " + mariage.partenaire2.prenom;
-                return new Etat_personne(id, citoyen.nom, citoyen.prenom, sexe, citoyen.date_naissance,
+                return new Etat_personne(citoyen.id, citoyen.nom, citoyen.prenom, sexe, citoyen.date_naissance,
                         nom_prenom_conjoint);
             } else {
                 String nom_prenom_conjoint = mariage.partenaire1.nom + " " + mariage.partenaire1.prenom;
-                return new Etat_personne(id, citoyen.nom, citoyen.prenom, sexe, citoyen.date_naissance,
+                return new Etat_personne(citoyen.id, citoyen.nom, citoyen.prenom, sexe, citoyen.date_naissance,
                         nom_prenom_conjoint);
             }
-        } catch (PersonneInexistante e) {
-            throw new PersonneInexistante(id);
         } catch (PasMarie e) {
-            Citoyen citoyen = this.trouver_citoyen_par_id(id);
             String sexe;
             if (citoyen instanceof Homme) {
                 sexe = "Homme";
             } else {
                 sexe = "Femme";
             }
-            return new Etat_personne(id, citoyen.nom, citoyen.prenom, sexe, citoyen.date_naissance, "");
+            return new Etat_personne(citoyen.id, citoyen.nom, citoyen.prenom, sexe, citoyen.date_naissance, "");
         }
     }
 }
