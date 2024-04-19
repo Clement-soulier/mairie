@@ -1,16 +1,17 @@
 package main.model;
 
 import java.time.LocalDate;
+import main.util.Etat_citoyen;
 
 public class Citoyen {
     static int get_id = 0;
-    public int id;
-    public String nom;
-    public String prenom;
-    public LocalDate date_naissance;
-    public Mairie mairie;
-    public Deces deces;
-    public Naissance naissance;
+    protected int id;
+    protected String nom;
+    protected String prenom;
+    protected LocalDate date_naissance;
+    protected Mairie mairie;
+    protected Deces deces;
+    protected Naissance naissance;
 
     public Citoyen(String name, String p, LocalDate d, Mairie m, Naissance n) {
         id = get_id++;
@@ -32,6 +33,15 @@ public class Citoyen {
         naissance = null;
     }
 
+    public Etat_citoyen obtenir_etat() {
+        String sexe;
+        if (this instanceof Homme) {
+            sexe = "Homme";
+        } else {
+            sexe = "Femme";
+        }
+        return new Etat_citoyen(id, sexe, sexe, sexe, date_naissance);
+    }
 
     public void to_string() {
         if (this instanceof Homme) {
