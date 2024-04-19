@@ -1,7 +1,6 @@
 package main.model;
 
 import java.time.LocalDate;
-import main.util.Etat_citoyen;
 
 public class Citoyen {
     static int get_id = 0;
@@ -31,16 +30,6 @@ public class Citoyen {
         mairie = m;
         deces = null;
         naissance = null;
-    }
-
-    public Etat_citoyen obtenir_etat() {
-        String sexe;
-        if (this instanceof Homme) {
-            sexe = "Homme";
-        } else {
-            sexe = "Femme";
-        }
-        return new Etat_citoyen(id, sexe, sexe, sexe, date_naissance);
     }
 
     public void to_string() {

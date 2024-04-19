@@ -3,6 +3,7 @@ package main.model;
 import java.util.*;
 import java.time.LocalDate;
 import main.exceptions.*;
+import main.util.Etat_personne;
 
 public class Mairie {
     public String nom_ville;
@@ -78,17 +79,6 @@ public class Mairie {
         throw new PasMarie(id_personne);
     }
 
-    public main.util.Mariage obtenir_mariage_util(int id_personne) throws PasMarie {
-        for (Mariage mariage : mariage) {
-            if ((mariage.partenaire1.id == id_personne ||
-                    mariage.partenaire2.id == id_personne) &&
-                    mariage.divorce == null) {
-                return new main.util.Mariage(mariage.date, mariage.mairie, mariage.partenaire1, mariage.partenaire2);
-            }
-        }
-        throw new PasMarie(id_personne);
-    }
-
     public void enregistrer_mariage(int id_partenaire1, int id_partenaire2, LocalDate date)
             throws DejaMarie, PersonneInexistante, Mort {
         if (est_marie(id_partenaire1)) {
@@ -158,5 +148,38 @@ public class Mairie {
         Deces d = new Deces(date, c, this);
         mort.add(d);
         c.deces = d;
+    }
+
+    public Etat_personne obtenir_etat(int id) throws PersonneInexistante {
+        try {
+            Citoyen citoyen = this.trouver_citoyen_par_id(id);
+            String sexe;
+            if (citoyen instanceof Homme) {
+                sexe = "Homme";
+            } else {
+                sexe = "Femme";
+            }
+            Mariage mariage = this.obtenir_mariage(id);
+            if (mariage.partenaire1 == citoyen) {
+                String nom_prenom_conjoint = mariage.partenaire2.nom + " " + mariage.partenaire2.prenom;
+                return new Etat_personne(id, citoyen.nom, citoyen.prenom, sexe, citoyen.date_naissance,
+                        nom_prenom_conjoint);
+            } else {
+                String nom_prenom_conjoint = mariage.partenaire1.nom + " " + mariage.partenaire1.prenom;
+                return new Etat_personne(id, citoyen.nom, citoyen.prenom, sexe, citoyen.date_naissance,
+                        nom_prenom_conjoint);
+            }
+        } catch (PersonneInexistante e) {
+            throw new PersonneInexistante(id);
+        } catch (PasMarie e) {
+            Citoyen citoyen = this.trouver_citoyen_par_id(id);
+            String sexe;
+            if (citoyen instanceof Homme) {
+                sexe = "Homme";
+            } else {
+                sexe = "Femme";
+            }
+            return new Etat_personne(id, citoyen.nom, citoyen.prenom, sexe, citoyen.date_naissance, "");
+        }
     }
 }

@@ -2,11 +2,20 @@ package main.util;
 
 import java.time.LocalDate;
 
-public class Etat_personne extends Etat_citoyen {
+public class Etat_personne {
+    public int id;
+    public String nom;
+    public String prenom;
+    public String sexe;
+    public LocalDate date_naissance;
     public String conjoint;
 
-    public Etat_personne(int id, String nom, String prenom, String sexe, LocalDate date_naissance, String conj) {
-        super(id, nom, prenom, sexe, date_naissance);
+    public Etat_personne(int identifiant, String n, String p, String s, LocalDate date, String conj) {
+        id = identifiant;
+        nom = n;
+        prenom = p;
+        sexe = s;
+        date_naissance = date;
         conjoint = conj;
     }
 }
