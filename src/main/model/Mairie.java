@@ -78,6 +78,17 @@ public class Mairie {
         throw new PasMarie(id_personne);
     }
 
+    public main.util.Mariage obtenir_mariage_util(int id_personne) throws PasMarie {
+        for (Mariage mariage : mariage) {
+            if ((mariage.partenaire1.id == id_personne ||
+                    mariage.partenaire2.id == id_personne) &&
+                    mariage.divorce == null) {
+                return new main.util.Mariage(mariage.date, mariage.mairie, mariage.partenaire1, mariage.partenaire2);
+            }
+        }
+        throw new PasMarie(id_personne);
+    }
+
     public void enregistrer_mariage(int id_partenaire1, int id_partenaire2, LocalDate date)
             throws DejaMarie, PersonneInexistante, Mort {
         if (est_marie(id_partenaire1)) {
