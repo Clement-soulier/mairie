@@ -59,7 +59,7 @@ public class Main_window extends JFrame {
         // initialisation fenêtre
         contentPane = new JPanel();
         contentPane.setLayout(new BorderLayout());
-        currentPanel = new main.view.Mariage(mairie);
+        currentPanel = new main.view.Liste(mairie);
         contentPane.add(currentPanel, BorderLayout.CENTER);
         add(contentPane);
 
