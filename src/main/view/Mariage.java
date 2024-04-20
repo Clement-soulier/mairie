@@ -46,7 +46,7 @@ public class Mariage extends JPanel {
                 id_partenaire2.setText("");
                 date.setText("");
             } catch (NumberFormatException numerr) {
-                message_erreur.setText("L'id " + numerr.getMessage() + " n'existe pas");
+                message_erreur.setText("L'un des id n'existe pas");
             } catch (DateTimeParseException date_err) {
                 message_erreur.setText("La date n'est pas valide");
             } catch (DejaMarie marie_err) {
@@ -87,5 +87,6 @@ public class Mariage extends JPanel {
         add(bouton_mariage);
         add(Box.createVerticalStrut(30));
         add(message_erreur);
+        add(Box.createVerticalStrut(30));
     }
 }
