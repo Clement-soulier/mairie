@@ -143,8 +143,13 @@ public class Mairie {
         citoyen.add(c);
     }
 
-    public void enregistrer_deces(int id_citoyen, LocalDate date) throws PersonneInexistante {
+    public void enregistrer_deces(int id_citoyen, LocalDate date) throws PersonneInexistante, Mort {
         Citoyen c = trouver_citoyen_par_id(id_citoyen);
+        for (Deces deces : mort) {
+            if (deces.citoyen == c) {
+                throw new Mort(id_citoyen);
+            }
+        }
         Deces d = new Deces(date, c, this);
         mort.add(d);
         c.deces = d;
