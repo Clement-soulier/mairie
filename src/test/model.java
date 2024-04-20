@@ -38,6 +38,8 @@ public class Model {
             m.enregistrer_deces(5, date);
         } catch (PersonneInexistante e) {
             System.out.println("Erreur " + e);
+        } catch (Mort mort_err) {
+            System.out.println(mort_err.to_string());
         }
 
         // mariage
