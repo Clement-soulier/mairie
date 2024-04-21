@@ -31,32 +31,6 @@ public class Mairie {
         throw new PersonneInexistante(id_citoyen);
     }
 
-    public Homme trouver_homme_par_id(int id_citoyen) throws PersonneInexistante, java.lang.IllegalArgumentException {
-        for (Citoyen citoyen : citoyen) {
-            if (citoyen.id == id_citoyen) {
-                if (citoyen instanceof Homme) {
-                    return (Homme) citoyen;
-                } else {
-                    throw new java.lang.IllegalArgumentException();
-                }
-            }
-        }
-        throw new PersonneInexistante(id_citoyen);
-    }
-
-    public Femme trouver_femme_par_id(int id_citoyen) throws PersonneInexistante, java.lang.IllegalArgumentException {
-        for (Citoyen citoyen : citoyen) {
-            if (citoyen.id == id_citoyen) {
-                if (citoyen instanceof Femme) {
-                    return (Femme) citoyen;
-                } else {
-                    throw new java.lang.IllegalArgumentException();
-                }
-            }
-        }
-        throw new PersonneInexistante(id_citoyen);
-    }
-
     public boolean est_marie(int id_personne) {
         for (Mariage mariage : mariage) {
             if ((mariage.partenaire1.id == id_personne ||
@@ -112,13 +86,21 @@ public class Mairie {
 
     public void enregistrer_naissance(int id_pere, int id_mere, LocalDate date_naissance, String nom, String prenom,
             String sexe)
-            throws PersonneInexistante, Mort, java.lang.IllegalArgumentException {
-        Homme parent1 = trouver_homme_par_id(id_pere);
-        Femme parent2 = trouver_femme_par_id(id_mere);
-        if (parent1.deces != null) {
+            throws PersonneInexistante, Mort, MauvaisSexe {
+        Citoyen parent1 = trouver_citoyen_par_id(id_pere);
+        if (parent1 instanceof Femme) {
+            throw new MauvaisSexe(id_pere);
+        }
+        Citoyen parent2 = trouver_citoyen_par_id(id_mere);
+        if (parent2 instanceof Homme) {
+            throw new MauvaisSexe(id_mere);
+        }
+        Homme pere = (Homme) parent1;
+        Femme mere = (Femme) parent2;
+        if (pere.deces != null) {
             throw new Mort(id_pere);
         }
-        if (parent2.deces != null) {
+        if (mere.deces != null) {
             throw new Mort(id_mere);
         }
         Citoyen c;
@@ -127,7 +109,7 @@ public class Mairie {
         } else {
             c = new Femme(nom, prenom, date_naissance, this);
         }
-        Naissance n = new Naissance(date_naissance, this, c, parent1, parent2);
+        Naissance n = new Naissance(date_naissance, this, c, pere, mere);
         c.naissance = n;
         citoyen.add(c);
         naissance.add(n);
