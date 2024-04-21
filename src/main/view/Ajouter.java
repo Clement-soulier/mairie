@@ -56,6 +56,7 @@ public class Ajouter extends JPanel {
                 prenom.setText("");
                 choix_sexe.setSelectedItem("(Sélection)");
                 naissance.setText("");
+                message_erreur.setText("");
             } catch (DateTimeParseException date_err) {
                 message_erreur.setText("La date n'est pas valide");
             }
