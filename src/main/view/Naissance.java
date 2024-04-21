@@ -29,7 +29,7 @@ public class Naissance extends JPanel {
         JTextField prenom = new JTextField(20);
         JLabel label_sexe = new JLabel("sexe");
         JComboBox<String> choix_sexe = new JComboBox<>(sexes);
-        JLabel label_naissance = new JLabel("Date de naissance");
+        JLabel label_naissance = new JLabel("Date de naissance (jj/mm/aaaa)");
         JTextField naissance = new JTextField(20);
         JButton bouton_naissance = new JButton("Ajouter");
         JLabel message_erreur = new JLabel("");
