@@ -94,6 +94,8 @@ public class Model {
             System.out.println("Erreur " + e);
         } catch (Mort e) {
             System.out.println("Erreur " + e);
+        } catch (MauvaisSexe e) {
+            System.out.println("Erreur " + e);
         }
         m.naissance.get(m.naissance.size() - 1).to_string();
 
@@ -104,6 +106,8 @@ public class Model {
             System.out.println("Erreur " + e);
         } catch (Mort e) {
             System.out.println("Erreur " + e);
+        } catch (MauvaisSexe e) {
+            System.out.println("Erreur " + e);
         }
 
         // si une personne est morte
@@ -112,6 +116,8 @@ public class Model {
         } catch (PersonneInexistante e) {
             System.out.println("Erreur " + e);
         } catch (Mort e) {
+            System.out.println("Erreur " + e);
+        } catch (MauvaisSexe e) {
             System.out.println("Erreur " + e);
         }
 
@@ -122,8 +128,8 @@ public class Model {
             System.out.println("Erreur " + e);
         } catch (Mort e) {
             System.out.println("Erreur " + e);
-        } catch (java.lang.IllegalArgumentException e) {
-            System.out.println("Les deux parents ne sont pas de sexe opposés");
+        } catch (MauvaisSexe e) {
+            System.out.println("Erreur " + e);
         }
 
         // divorce
