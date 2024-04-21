@@ -4,7 +4,7 @@ public class Mort extends Exception {
     private int numero_citoyen;
 
     public Mort() {
-        super("Cette personne est déjà marié(e)");
+        super("Cette personne est morte");
     }
 
     public Mort(int num_citoyen) {
