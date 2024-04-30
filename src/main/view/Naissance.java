@@ -1,90 +1,40 @@
 package main.view;
 
 import java.awt.*;
-import java.time.LocalDate;
-
 import javax.swing.*;
-
-import main.exceptions.MauvaisSexe;
-import main.exceptions.Mort;
-import main.exceptions.PersonneInexistante;
 import main.model.*;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Naissance extends JPanel {
+    private JLabel label_pere = new JLabel("id père");
+    private JTextField id_pere = new JTextField(20);
+    private JLabel label_mere = new JLabel("id mère");
+    private JTextField id_mere = new JTextField(20);
+    private JLabel label_nom = new JLabel("Nom");
+    private JTextField nom = new JTextField(20);
+    private JLabel label_prenom = new JLabel("Prénom");
+    private JTextField prenom = new JTextField(20);
+    private JLabel label_sexe = new JLabel("sexe");
+    private JComboBox<String> choix_sexe;
+    private JLabel label_naissance = new JLabel("Date de naissance (jj/mm/aaaa)");
+    private JTextField naissance = new JTextField(20);
+    private JButton bouton_naissance = new JButton("Ajouter");
+    private JLabel message_erreur = new JLabel("");
+
     public Naissance(Mairie mairie) {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         String[] sexes = { "(Sélection)", "Homme", "Femme" };
 
-        JLabel label_pere = new JLabel("id père");
-        JTextField id_pere = new JTextField(20);
-        JLabel label_mere = new JLabel("id mère");
-        JTextField id_mere = new JTextField(20);
-        JLabel label_nom = new JLabel("Nom");
-        JTextField nom = new JTextField(20);
-        JLabel label_prenom = new JLabel("Prénom");
-        JTextField prenom = new JTextField(20);
-        JLabel label_sexe = new JLabel("sexe");
-        JComboBox<String> choix_sexe = new JComboBox<>(sexes);
-        JLabel label_naissance = new JLabel("Date de naissance (jj/mm/aaaa)");
-        JTextField naissance = new JTextField(20);
-        JButton bouton_naissance = new JButton("Ajouter");
-        JLabel message_erreur = new JLabel("");
+        choix_sexe = new JComboBox<>(sexes);
         message_erreur.setForeground(Color.RED);
 
-        bouton_naissance.addActionListener(e -> {
-            try {
-                int pere = Integer.parseInt(id_pere.getText());
-                int mere = Integer.parseInt(id_mere.getText());
-                if (pere == mere) {
-                    message_erreur.setText("Les deux parents doivent être deux personnes différentes");
-                    return;
-                }
-                String naissance_nom = nom.getText();
-                if (naissance_nom.equals("")) {
-                    message_erreur.setText("Veuillez renseigner un nom");
-                    return;
-                }
-                String naissance_prenom = prenom.getText();
-                if (naissance_prenom.equals("")) {
-                    message_erreur.setText("Veuillez renseigner un prénom");
-                    return;
-                }
-                String naissance_sexe = (String) choix_sexe.getSelectedItem();
-                if (naissance_sexe.equals("(Sélection)")) {
-                    message_erreur.setText("Veuillez sélectionner un sexe");
-                    return;
-                }
-                LocalDate naissance_naissance = LocalDate.parse(naissance.getText(),
-                        DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                if (naissance_naissance.isAfter(LocalDate.now())) {
-                    message_erreur.setText("La personne doit être né(e) actuellement");
-                    return;
-                }
-                mairie.enregistrer_naissance(pere, mere, naissance_naissance, naissance_nom, naissance_prenom,
-                        naissance_sexe);
-                id_pere.setText("");
-                id_mere.setText("");
-                nom.setText("");
-                prenom.setText("");
-                choix_sexe.setSelectedItem("(Sélection)");
-                naissance.setText("");
-                message_erreur.setText("");
-            } catch (NumberFormatException numerr) {
-                message_erreur.setText("L'un des id n'existe pas");
-            } catch (DateTimeParseException date_err) {
-                message_erreur.setText("La date n'est pas valide");
-            } catch (PersonneInexistante inexistante_err) {
-                message_erreur.setText(inexistante_err.to_string());
-            } catch (Mort mort_err) {
-                message_erreur.setText(mort_err.to_string());
-            } catch (MauvaisSexe sexe_err) {
-                message_erreur.setText(sexe_err.to_string());
-            }
-        });
+        main.controller.Naissance controller = new main.controller.Naissance(
+                label_pere, id_pere, label_mere, id_mere, label_nom, nom, label_prenom,
+                prenom, label_sexe, choix_sexe, label_naissance, naissance, bouton_naissance,
+                message_erreur, mairie);
+
+        bouton_naissance.addActionListener(e -> controller.actionPerformed(e));
 
         label_pere.setAlignmentX(CENTER_ALIGNMENT);
         id_pere.setAlignmentX(CENTER_ALIGNMENT);

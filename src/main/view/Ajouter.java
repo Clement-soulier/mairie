@@ -1,66 +1,37 @@
 package main.view;
 
-import java.awt.*;
-import java.time.LocalDate;
-
-import javax.swing.*;
 import main.model.*;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import javax.swing.*;
 
 public class Ajouter extends JPanel {
+    private JLabel label_nom = new JLabel("nom");
+    private JTextField nom = new JTextField(20);
+    private JLabel label_prenom = new JLabel("prénom");
+    private JTextField prenom = new JTextField(20);
+    private JLabel label_sexe = new JLabel("sexe");
+    private JComboBox<String> choix_sexe;
+    private JLabel label_naissance = new JLabel("date de naissance (jj/mm/aaaa)");
+    private JTextField naissance = new JTextField(20);
+    private JButton bouton_ajouter = new JButton("Ajouter");
+    private JLabel message_erreur = new JLabel("");
+
     public Ajouter(Mairie mairie) {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         String[] sexes = { "(Sélection)", "Homme", "Femme" };
 
-        JLabel label_nom = new JLabel("nom");
-        JTextField nom = new JTextField(20);
-        JLabel label_prenom = new JLabel("prénom");
-        JTextField prenom = new JTextField(20);
-        JLabel label_sexe = new JLabel("sexe");
-        JComboBox<String> choix_sexe = new JComboBox<>(sexes);
-        JLabel label_naissance = new JLabel("date de naissance (jj/mm/aaaa)");
-        JTextField naissance = new JTextField(20);
-        JButton bouton_ajouter = new JButton("Ajouter");
-        JLabel message_erreur = new JLabel("");
+        choix_sexe = new JComboBox<>(sexes);
         message_erreur.setForeground(Color.RED);
 
-        bouton_ajouter.addActionListener(e -> {
-            try {
-                String nouveau_nom = nom.getText();
-                if (nouveau_nom.equals("")) {
-                    message_erreur.setText("Veuillez renseigner un nom");
-                    return;
-                }
-                String nouveau_prenom = prenom.getText();
-                if (nouveau_prenom.equals("")) {
-                    message_erreur.setText("Veuillez renseigner un prénom");
-                    return;
-                }
-                String nouveau_sexe = (String) choix_sexe.getSelectedItem();
-                if (nouveau_sexe.equals("(Sélection)")) {
-                    message_erreur.setText("Veuillez sélectionner un sexe");
-                    return;
-                }
-                LocalDate nouveau_naissance = LocalDate.parse(naissance.getText(),
-                        DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                if (nouveau_naissance.isAfter(LocalDate.now())) {
-                    message_erreur.setText("La personne doit être né(e) actuellement");
-                    return;
-                }
-                mairie.ajouter_citoyen(nouveau_naissance, nouveau_nom, nouveau_prenom,
-                        nouveau_sexe);
-                nom.setText("");
-                prenom.setText("");
-                choix_sexe.setSelectedItem("(Sélection)");
-                naissance.setText("");
-                message_erreur.setText("");
-            } catch (DateTimeParseException date_err) {
-                message_erreur.setText("La date n'est pas valide");
-            }
-        });
+        main.controller.Ajouter controller = new main.controller.Ajouter(label_nom,
+                nom, label_prenom, prenom, label_sexe, choix_sexe, label_naissance,
+                naissance, bouton_ajouter, message_erreur, mairie);
+
+        bouton_ajouter.addActionListener(e -> controller.actionPerformed(e));
 
         label_nom.setAlignmentX(CENTER_ALIGNMENT);
         nom.setAlignmentX(CENTER_ALIGNMENT);
