@@ -7,8 +7,26 @@ import main.model.*;
 
 public class Main_window extends JFrame {
 
-    private JPanel contentPane;
+    private JPanel contentPane = new JPanel();
     private JPanel currentPanel;
+    // création menu bar
+    private JMenuBar menu = new JMenuBar();
+    // Création du menu Fichier
+    private JMenu fichierMenu = new JMenu("Fichier");
+    private JMenuItem nouveau = new JMenuItem("Nouveau", 'N');
+    private JMenuItem ouvrir = new JMenuItem("Ouvrir", 'O');
+    private JMenuItem sauver = new JMenuItem("Sauver", 'S');
+    private JMenuItem quitter = new JMenuItem("Quitter");
+    // Création menu action
+    private JMenu actionMenu = new JMenu("Action");
+    private JMenuItem etat = new JMenuItem("Etat");
+    private JMenuItem liste = new JMenuItem("Liste");
+    private JMenuItem mariage = new JMenuItem("Mariage");
+    private JMenuItem divorce = new JMenuItem("Divorce");
+    private JMenuItem naissance = new JMenuItem("Naissance");
+    private JMenuItem deces = new JMenuItem("Décès");
+    private JMenuItem ajouter = new JMenuItem("Ajouter");
+    private JMenuItem APropos = new JMenuItem("A propos");
 
     public Main_window(Mairie mairie) {
         super("gestion mairie");
@@ -16,132 +34,33 @@ public class Main_window extends JFrame {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation(dim.width / 2 - getWidth() / 2, dim.height / 2 - getHeight() / 2);
 
-        // création menu bar
-        JMenuBar menu = new JMenuBar();
-        // Création du menu Fichier
-        JMenu fichierMenu = new JMenu("Fichier");
-        JMenuItem nouveau = new JMenuItem("Nouveau", 'N');
         fichierMenu.add(nouveau);
-        JMenuItem ouvrir = new JMenuItem("Ouvrir", 'O');
         fichierMenu.add(ouvrir);
-        JMenuItem sauver = new JMenuItem("Sauver", 'S');
         fichierMenu.add(sauver);
-        JMenuItem quitter = new JMenuItem("Quitter");
         fichierMenu.add(quitter);
         fichierMenu.insertSeparator(1);
 
-        // Création menu action
-        JMenu actionMenu = new JMenu("Action");
-        JMenuItem etat = new JMenuItem("Etat");
         actionMenu.add(etat);
-        JMenuItem liste = new JMenuItem("Liste");
         actionMenu.add(liste);
-        JMenuItem mariage = new JMenuItem("Mariage");
         actionMenu.add(mariage);
-        JMenuItem divorce = new JMenuItem("Divorce");
         actionMenu.add(divorce);
-        JMenuItem naissance = new JMenuItem("Naissance");
         actionMenu.add(naissance);
-        JMenuItem deces = new JMenuItem("Décès");
         actionMenu.add(deces);
-        JMenuItem ajouter = new JMenuItem("Ajouter");
         actionMenu.add(ajouter);
         actionMenu.insertSeparator(2);
 
         add(fichierMenu);
         add(actionMenu);
-        JMenuItem APropos = new JMenuItem("A propos");
         menu.add(fichierMenu);
         menu.add(actionMenu);
         menu.add(APropos);
         setJMenuBar(menu);
 
         // initialisation fenêtre
-        contentPane = new JPanel();
         contentPane.setLayout(new BorderLayout());
         currentPanel = new main.view.Liste(mairie);
         contentPane.add(currentPanel, BorderLayout.CENTER);
         add(contentPane);
-
-        etat.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new main.view.Etat(mairie);
-            }
-        });
-
-        liste.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                contentPane.remove(currentPanel);
-                currentPanel = new main.view.Liste(mairie);
-                contentPane.add(currentPanel, BorderLayout.CENTER);
-                revalidate();
-                repaint();
-            }
-        });
-
-        mariage.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                contentPane.remove(currentPanel);
-                currentPanel = new main.view.Mariage(mairie);
-                contentPane.add(currentPanel, BorderLayout.CENTER);
-                revalidate();
-                repaint();
-            }
-        });
-
-        divorce.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                contentPane.remove(currentPanel);
-                currentPanel = new main.view.Divorce(mairie);
-                contentPane.add(currentPanel, BorderLayout.CENTER);
-                revalidate();
-                repaint();
-            }
-        });
-
-        deces.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                contentPane.remove(currentPanel);
-                currentPanel = new main.view.Deces(mairie);
-                contentPane.add(currentPanel, BorderLayout.CENTER);
-                revalidate();
-                repaint();
-            }
-        });
-
-        ajouter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                contentPane.remove(currentPanel);
-                currentPanel = new main.view.Ajouter(mairie);
-                contentPane.add(currentPanel, BorderLayout.CENTER);
-                revalidate();
-                repaint();
-            }
-        });
-
-        naissance.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                contentPane.remove(currentPanel);
-                currentPanel = new main.view.Naissance(mairie);
-                contentPane.add(currentPanel, BorderLayout.CENTER);
-                revalidate();
-                repaint();
-            }
-        });
-
-        APropos.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new main.view.APropos();
-            }
-        });
 
         WindowListener l = new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -149,6 +68,18 @@ public class Main_window extends JFrame {
             }
         };
 
+        main.controller.Main_window controller = new main.controller.Main_window(
+                this, contentPane, currentPanel, menu, fichierMenu, nouveau,
+                ouvrir, sauver, quitter, actionMenu, etat, liste, mariage, divorce,
+                naissance, deces, ajouter, APropos, mairie);
+
+        etat.addActionListener(e -> controller.actionPerformed(e));
+        liste.addActionListener(e -> controller.actionPerformed(e));
+        mariage.addActionListener(e -> controller.actionPerformed(e));
+        divorce.addActionListener(e -> controller.actionPerformed(e));
+        naissance.addActionListener(e -> controller.actionPerformed(e));
+        deces.addActionListener(e -> controller.actionPerformed(e));
+        ajouter.addActionListener(e -> controller.actionPerformed(e));
         addWindowListener(l);
         setVisible(true);
     }

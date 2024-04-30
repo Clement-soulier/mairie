@@ -35,7 +35,6 @@ public class Ajouter implements ActionListener {
         bouton_ajouter = bout_ajouter;
         message_erreur = msg_erreur;
         mairie = m;
-        System.out.println(n.getText());
     }
 
     public void actionPerformed(ActionEvent e) {
