@@ -134,7 +134,7 @@ public class Model {
 
         // divorce
         try {
-            m.enregistrer_divorce(0);
+            m.enregistrer_divorce(0, date);
         } catch (PersonneInexistante e) {
             System.out.println("Erreur " + e);
         } catch (PasMarie e) {
@@ -147,7 +147,7 @@ public class Model {
 
         // si pas marié
         try {
-            m.enregistrer_divorce(3);
+            m.enregistrer_divorce(3, date);
         } catch (PasMarie e) {
             System.out.println("Erreur " + e);
         } catch (PersonneInexistante e) {
@@ -158,7 +158,7 @@ public class Model {
 
         // si n'existe pas
         try {
-            m.enregistrer_divorce(90);
+            m.enregistrer_divorce(90, date);
         } catch (PasMarie e) {
             System.out.println("Erreur " + e);
         } catch (PersonneInexistante e) {

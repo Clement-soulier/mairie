@@ -72,12 +72,11 @@ public class Mairie {
         mariage.add(m);
     }
 
-    public void enregistrer_divorce(int id_personne) throws PersonneInexistante, PasMarie, Mort {
+    public void enregistrer_divorce(int id_personne, LocalDate date) throws PersonneInexistante, PasMarie, Mort {
         Citoyen citoyen = trouver_citoyen_par_id(id_personne);
         if (citoyen.deces != null) {
             throw new Mort(id_personne);
         }
-        LocalDate date = LocalDate.now();
         Mariage mariage = obtenir_mariage(id_personne);
         Divorce d = new Divorce(date, mariage, this);
         divorce.add(d);
