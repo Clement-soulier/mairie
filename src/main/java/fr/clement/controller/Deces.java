@@ -1,5 +1,6 @@
 package fr.clement.controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -43,14 +44,19 @@ public class Deces implements ActionListener {
             mairie.enregistrer_deces(id, date_deces);
             id_personne.setText("");
             date.setText("");
-            message_erreur.setText("");
+            message_erreur.setForeground(Color.GREEN);
+            message_erreur.setText("Le Décès à bien été déclaré");
         } catch (NumberFormatException numerr) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText("L'id n'existe pas");
         } catch (DateTimeParseException date_err) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText("La date n'est pas valide");
         } catch (PersonneInexistante inexistante_err) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText(inexistante_err.to_string());
         } catch (Mort mort_err) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText("Cette personne est déjà morte");
         }
     }

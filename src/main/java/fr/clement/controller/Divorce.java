@@ -1,5 +1,6 @@
 package fr.clement.controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -37,14 +38,19 @@ public class Divorce implements ActionListener {
             mairie.enregistrer_divorce(id, date_divorce);
             id_personne.setText("");
             date.setText("");
-            message_erreur.setText("");
+            message_erreur.setForeground(Color.GREEN);
+            message_erreur.setText("Le divorce a bien été déclaré");
         } catch (NumberFormatException numerr) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText("L'id n'existe pas");
         } catch (PersonneInexistante inexistante_err) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText(inexistante_err.to_string());
         } catch (PasMarie marie_err) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText(marie_err.to_string());
         } catch (Mort mort_err) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText(mort_err.to_string());
         }
     }

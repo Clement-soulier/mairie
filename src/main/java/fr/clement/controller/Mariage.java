@@ -9,6 +9,7 @@ import fr.clement.model.Mairie;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -51,19 +52,25 @@ public class Mariage implements ActionListener {
                 return;
             }
             mairie.enregistrer_mariage(id1, id2, date_mariage);
-            message_erreur.setText("");
+            message_erreur.setForeground(Color.GREEN);
+            message_erreur.setText("La mariage a bien été enregistré");
             id_partenaire1.setText("");
             id_partenaire2.setText("");
             date.setText("");
         } catch (NumberFormatException numerr) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText("L'un des id n'existe pas");
         } catch (DateTimeParseException date_err) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText("La date n'est pas valide");
         } catch (DejaMarie marie_err) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText(marie_err.to_string());
         } catch (PersonneInexistante inexistante_err) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText(inexistante_err.to_string());
         } catch (Mort mort_err) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText(mort_err.to_string());
         }
     }

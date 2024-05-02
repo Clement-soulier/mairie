@@ -1,5 +1,6 @@
 package fr.clement.controller;
 
+import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.*;
 import java.time.LocalDate;
@@ -63,8 +64,10 @@ public class Ajouter implements ActionListener {
             prenom.setText("");
             choix_sexe.setSelectedItem("(Sélection)");
             naissance.setText("");
-            message_erreur.setText("");
+            message_erreur.setForeground(Color.GREEN);
+            message_erreur.setText("Citoyen ajouté avec succès");
         } catch (DateTimeParseException date_err) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText("La date n'est pas valide");
         }
     }

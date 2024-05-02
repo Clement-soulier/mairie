@@ -2,6 +2,7 @@ package fr.clement.controller;
 
 import javax.swing.*;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -47,6 +48,7 @@ public class Naissance implements ActionListener {
         label_naissance = lab_naiss;
         naissance = naiss;
         bouton_naissance = bout_naissance;
+        message_erreur = msg_erreur;
         mairie = m;
     }
 
@@ -84,16 +86,22 @@ public class Naissance implements ActionListener {
             prenom.setText("");
             choix_sexe.setSelectedItem("(Sélection)");
             naissance.setText("");
-            message_erreur.setText("");
+            message_erreur.setForeground(Color.GREEN);
+            message_erreur.setText("La naissance a bien été déclaré");
         } catch (NumberFormatException numerr) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText("L'un des id n'existe pas");
         } catch (DateTimeParseException date_err) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText("La date n'est pas valide");
         } catch (PersonneInexistante inexistante_err) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText(inexistante_err.to_string());
         } catch (Mort mort_err) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText(mort_err.to_string());
         } catch (MauvaisSexe sexe_err) {
+            message_erreur.setForeground(Color.RED);
             message_erreur.setText(sexe_err.to_string());
         }
     }
