@@ -109,6 +109,7 @@ public class Main_window_content implements ActionListener {
             if (confirmation == JOptionPane.YES_OPTION) {
                 String nouveau_nom = JOptionPane.showInputDialog(null,
                         "Veuillez entrez le nom de la ville dont vous allez gérer la mairie");
+                mairie.reset_id();
                 mairie = new Mairie(nouveau_nom);
                 contentPane.remove(currentPanel);
                 currentPanel = new fr.clement.view.Liste(mairie);
@@ -153,6 +154,7 @@ public class Main_window_content implements ActionListener {
                     fluxObjectEntree.close();
                     fichierEntree.close();
                     mairie = objectDeserialisee;
+                    mairie.set_id();
                     contentPane.remove(currentPanel);
                     currentPanel = new fr.clement.view.Liste(mairie);
                     contentPane.add(currentPanel, BorderLayout.CENTER);

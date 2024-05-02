@@ -43,4 +43,12 @@ public class Citoyen implements Serializable {
         }
     }
 
+    protected void resetId() {
+        get_id = 0;
+    }
+
+    protected void setId(int new_id) {
+        get_id = new_id;
+    }
+
 }

@@ -165,4 +165,13 @@ public class Mairie implements Serializable {
             return new Etat_personne(citoyen.id, citoyen.nom, citoyen.prenom, sexe, citoyen.date_naissance, "");
         }
     }
+
+    public void reset_id() {
+        citoyen.get(0).resetId();
+    }
+
+    public void set_id() {
+        Citoyen c = citoyen.get(citoyen.size() - 1);
+        c.setId(c.id + 1);
+    }
 }
