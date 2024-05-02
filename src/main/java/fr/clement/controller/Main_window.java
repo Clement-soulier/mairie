@@ -44,6 +44,10 @@ public class Main_window implements WindowListener {
                     JOptionPane.showMessageDialog(null, "Echec lors de l'enregistrement du fichier");
                 }
             }
+        } else if (choix == JOptionPane.NO_OPTION) {
+            System.exit(0);
+        } else {
+            return;
         }
     }
 

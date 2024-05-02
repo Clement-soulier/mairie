@@ -34,6 +34,8 @@ public class Main_window extends JFrame {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation(dim.width / 2 - getWidth() / 2, dim.height / 2 - getHeight() / 2);
 
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
         fichierMenu.add(nouveau);
         fichierMenu.add(ouvrir);
         fichierMenu.add(sauver);
