@@ -1,5 +1,3 @@
-package fr.clement;
-
 import javax.swing.*;
 import fr.clement.model.*;
 import fr.clement.view.*;
