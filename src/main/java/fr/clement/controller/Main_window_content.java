@@ -102,7 +102,7 @@ public class Main_window_content implements ActionListener {
             window.revalidate();
             window.repaint();
         } else if (e.getSource() == APropos) {
-            new fr.clement.view.APropos();
+            JOptionPane.showMessageDialog(null, "Clément Soulier 2024");
         } else if (e.getSource() == nouveau) {
             int confirmation = JOptionPane.showConfirmDialog(null,
                     "Attention toute modification non enregistré sera perdue. Souhaitez vous continuer ?");

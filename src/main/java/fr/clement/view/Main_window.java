@@ -81,6 +81,7 @@ public class Main_window extends JFrame {
         naissance.addActionListener(e -> controller.actionPerformed(e));
         deces.addActionListener(e -> controller.actionPerformed(e));
         ajouter.addActionListener(e -> controller.actionPerformed(e));
+        APropos.addActionListener(e -> controller.actionPerformed(e));
         setVisible(true);
     }
 }
