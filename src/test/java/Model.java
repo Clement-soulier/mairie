@@ -50,7 +50,6 @@ public class Model {
         } catch (Mort e) {
             System.out.println("Erreur " + e);
         }
-        m.mariage.get(0).to_string();
 
         // si une des personne est déjà marié
         try {
@@ -95,7 +94,6 @@ public class Model {
         } catch (MauvaisSexe e) {
             System.out.println("Erreur " + e);
         }
-        m.naissance.get(m.naissance.size() - 1).to_string();
 
         // si une personne n'existe pas
         try {
@@ -140,8 +138,6 @@ public class Model {
         } catch (Mort e) {
             System.out.println("Erreur " + e);
         }
-        m.mariage.get(0).to_string();
-        m.divorce.get(0).to_string();
 
         // si pas marié
         try {

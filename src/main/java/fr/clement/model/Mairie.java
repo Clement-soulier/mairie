@@ -2,17 +2,19 @@ package fr.clement.model;
 
 import java.util.*;
 import java.time.LocalDate;
+
+import fr.clement.controller.Etat;
 import fr.clement.exceptions.*;
 import fr.clement.util.Etat_personne;
 import java.io.Serializable;
 
 public class Mairie implements Serializable {
-    public String nom_ville;
-    public ArrayList<Citoyen> citoyen;
-    public ArrayList<Mariage> mariage;
-    public ArrayList<Naissance> naissance;
-    public ArrayList<Deces> mort;
-    public ArrayList<Divorce> divorce;
+    protected String nom_ville;
+    private ArrayList<Citoyen> citoyen;
+    private ArrayList<Mariage> mariage;
+    private ArrayList<Naissance> naissance;
+    private ArrayList<Deces> mort;
+    private ArrayList<Divorce> divorce;
 
     public Mairie(String ville) {
         nom_ville = ville;
@@ -164,6 +166,14 @@ public class Mairie implements Serializable {
             }
             return new Etat_personne(citoyen.id, citoyen.nom, citoyen.prenom, sexe, citoyen.date_naissance, "");
         }
+    }
+
+    public ArrayList<Etat_personne> obtenir_etat_tous_citoyen() {
+        ArrayList<Etat_personne> liste = new ArrayList<Etat_personne>();
+        for (Citoyen c : citoyen) {
+            liste.add(this.obtenir_etat(c));
+        }
+        return liste;
     }
 
     public void reset_id() {

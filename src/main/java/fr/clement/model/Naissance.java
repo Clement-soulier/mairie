@@ -5,10 +5,10 @@ import java.io.Serializable;
 
 public class Naissance implements Serializable {
     protected LocalDate date;
-    public Mairie mairie;
-    public Citoyen citoyen;
-    public Homme pere;
-    public Femme mere;
+    protected Mairie mairie;
+    protected Citoyen citoyen;
+    protected Homme pere;
+    protected Femme mere;
 
     public Naissance(LocalDate d, Mairie m, Citoyen c, Homme p1, Femme p2) {
         date = d;

@@ -5,8 +5,8 @@ import java.io.Serializable;
 
 public class Divorce implements Serializable {
     protected LocalDate date;
-    public Mariage mariage;
-    public Mairie mairie;
+    protected Mariage mariage;
+    protected Mairie mairie;
 
     public Divorce(LocalDate d, Mariage m, Mairie mair) {
         date = d;

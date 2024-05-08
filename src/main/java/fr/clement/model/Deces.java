@@ -5,8 +5,8 @@ import java.io.Serializable;
 
 public class Deces implements Serializable {
     protected LocalDate date;
-    public Citoyen citoyen;
-    public Mairie mairie;
+    protected Citoyen citoyen;
+    protected Mairie mairie;
 
     public Deces(LocalDate d, Citoyen c, Mairie m) {
         date = d;

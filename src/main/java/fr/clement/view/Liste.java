@@ -13,8 +13,8 @@ public class Liste extends JPanel {
 
         ArrayList<Etat_personne> donnees = new ArrayList<>();
 
-        for (Citoyen citoyen : mairie.citoyen) {
-            donnees.add(mairie.obtenir_etat(citoyen));
+        for (Etat_personne citoyen : mairie.obtenir_etat_tous_citoyen()) {
+            donnees.add(citoyen);
         }
 
         DefaultTableModel model = new DefaultTableModel();
