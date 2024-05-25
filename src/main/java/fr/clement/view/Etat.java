@@ -3,7 +3,6 @@ package fr.clement.view;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import java.awt.event.*;
 import java.awt.*;
 import fr.clement.model.*;
 

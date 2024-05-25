@@ -1,8 +1,6 @@
 import javax.swing.*;
 import fr.clement.model.*;
-import fr.clement.view.*;
 import java.time.LocalDate;
-import fr.clement.view.Main_window;
 
 public class Test_fenetre {
 

@@ -3,7 +3,6 @@ package fr.clement.model;
 import java.util.*;
 import java.time.LocalDate;
 
-import fr.clement.controller.Etat;
 import fr.clement.exceptions.*;
 import fr.clement.util.Etat_personne;
 import java.io.Serializable;
